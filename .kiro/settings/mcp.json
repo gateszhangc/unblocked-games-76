@@ -16,7 +16,8 @@
         "list_console_messages",
         "evaluate_script",
         "get_network_request",
-        "performance_start_trace"
+        "performance_start_trace",
+        "new_page"
       ]
     }
   }
