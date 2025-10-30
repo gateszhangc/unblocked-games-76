@@ -52,10 +52,27 @@ function downloadFile(url, localPath) {
 async function downloadAssets() {
   console.log('正在扫描 HTML 文件...');
   
-  const files = [
-    path.join(process.cwd(), 'data', 'home-head.html'),
-    path.join(process.cwd(), 'data', 'home-body.html'),
-  ];
+  // 获取命令行参数中的游戏 slug
+  const gameSlug = process.argv[2];
+  
+  let files = [];
+  
+  if (gameSlug) {
+    // 如果指定了游戏 slug，只扫描该游戏的文件
+    const gameDir = path.join(process.cwd(), 'data', 'games', gameSlug);
+    files = [
+      path.join(gameDir, 'head.html'),
+      path.join(gameDir, 'body.html'),
+    ];
+    console.log(`扫描游戏: ${gameSlug}`);
+  } else {
+    // 否则扫描首页文件
+    files = [
+      path.join(process.cwd(), 'data', 'home-head.html'),
+      path.join(process.cwd(), 'data', 'home-body.html'),
+    ];
+    console.log('扫描首页文件');
+  }
   
   const allUrls = new Set();
   
