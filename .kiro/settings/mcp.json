@@ -6,6 +6,7 @@
         "-y",
         "chrome-devtools-mcp"
       ],
+      "env": {},
       "disabled": false,
       "autoApprove": [
         "list_pages",
@@ -18,7 +19,9 @@
         "get_network_request",
         "performance_start_trace",
         "new_page",
-        "select_page"
+        "select_page",
+        "click",
+        "wait_for"
       ]
     }
   }

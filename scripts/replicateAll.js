@@ -59,6 +59,9 @@ let successCount = 0;
 let failCount = 0;
 const failedGames = [];
 
+console.log('\n注意: 每个游戏复刻后需要通过测试才能标记为完成');
+console.log('测试方法: 使用 Chrome DevTools 对比本地和原始网站\n');
+
 for (let i = 0; i < pendingGames.length; i++) {
   const slug = pendingGames[i];
   console.log(`\n[${i + 1}/${pendingGames.length}] 正在复刻: ${slug}`);
@@ -68,6 +71,12 @@ for (let i = 0; i < pendingGames.length; i++) {
       stdio: 'inherit',
       timeout: 30000 // 30秒超时
     });
+    
+    console.log(`\n✓ 复刻完成: ${slug}`);
+    console.log(`本地: http://localhost:3000/g/${slug}`);
+    console.log(`原始: https://poki.ee/g/${slug}`);
+    console.log('请使用 Chrome DevTools 测试后确认\n');
+    
     successCount++;
     
     // 更新进度文档
@@ -79,8 +88,8 @@ for (let i = 0; i < pendingGames.length; i++) {
     failedGames.push(slug);
   }
   
-  // 每复刻10个游戏暂停一下
-  if ((i + 1) % 10 === 0) {
+  // 每复刻5个游戏暂停一下
+  if ((i + 1) % 5 === 0) {
     console.log(`\n--- 已完成 ${i + 1}/${pendingGames.length} ---`);
     console.log(`成功: ${successCount}, 失败: ${failCount}\n`);
   }
