@@ -1,32 +1,33 @@
 const fs = require('fs');
 const path = require('path');
 
-const slug = process.argv[2];
+const gamesDir = path.join(__dirname, '..', 'data', 'games');
+const games = fs.readdirSync(gamesDir);
 
-if (!slug) {
-  console.error('请提供游戏 slug');
-  process.exit(1);
-}
+let count = 0;
 
-const bodyPath = path.join(process.cwd(), 'data', 'games', slug, 'body.html');
+games.forEach(slug => {
+  const bodyPath = path.join(gamesDir, slug, 'body.html');
+  
+  if (fs.existsSync(bodyPath)) {
+    let content = fs.readFileSync(bodyPath, 'utf8');
+    
+    // 移除广告相关的 div 块
+    content = content.replace(/<div[^>]*id="ad-700x100"[^>]*>[\s\S]*?<\/div>/gi, '');
+    content = content.replace(/<div[^>]*id="ad-400x400-1"[^>]*>[\s\S]*?<\/div>/gi, '');
+    content = content.replace(/<div[^>]*id="ad-400x400-2"[^>]*>[\s\S]*?<\/div>/gi, '');
+    content = content.replace(/<div[^>]*id="overlayVid"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi, '');
+    content = content.replace(/<div[^>]*id="ad-box"[^>]*>[\s\S]*?<\/div>/gi, '');
+    
+    // 移除 adsbygoogle 相关代码
+    content = content.replace(/<script[^>]*src="[^"]*adsbygoogle[^"]*"[^>]*>[\s\S]*?<\/script>/gi, '');
+    content = content.replace(/<ins[^>]*class="adsbygoogle"[^>]*>[\s\S]*?<\/ins>/gi, '');
+    content = content.replace(/<!--\s*drivemad\d+x\d+\s*-->/gi, '');
+    content = content.replace(/<script>\s*\(adsbygoogle\s*=\s*window\.adsbygoogle\s*\|\|\s*\[\]\)\.push\(\{\}\);\s*<\/script>/gi, '');
+    
+    fs.writeFileSync(bodyPath, content, 'utf8');
+    count++;
+  }
+});
 
-if (!fs.existsSync(bodyPath)) {
-  console.error(`文件不存在: ${bodyPath}`);
-  process.exit(1);
-}
-
-let content = fs.readFileSync(bodyPath, 'utf8');
-
-// 删除 overlayVid 广告容器
-content = content.replace(/<div id="overlayVid"[^>]*>[\s\S]*?<\/div>\s*<\/div>/g, '');
-
-// 删除其他广告相关元素
-content = content.replace(/<div id="ad-box"[^>]*>[\s\S]*?<\/div>/g, '');
-
-// 删除 Google AdSense 脚本
-content = content.replace(/<script[^>]*pagead2\.googlesyndication\.com[^>]*>[\s\S]*?<\/script>/g, '');
-content = content.replace(/<ins class="adsbygoogle"[^>]*>[\s\S]*?<\/ins>/g, '');
-
-fs.writeFileSync(bodyPath, content);
-
-console.log(`✓ 已从 ${slug} 游戏页面删除广告`);
+console.log(`✓ 已移除 ${count} 个游戏页面的广告代码`);
