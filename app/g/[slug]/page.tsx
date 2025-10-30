@@ -1,5 +1,15 @@
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
+
+export function generateStaticParams() {
+  try {
+    const gamesDir = join(process.cwd(), 'data', 'games')
+    const games = readdirSync(gamesDir)
+    return games.map((slug) => ({ slug }))
+  } catch (e) {
+    return []
+  }
+}
 
 export default function GamePage({ params }: { params: { slug: string } }) {
   const slug = params.slug

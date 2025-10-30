@@ -37,11 +37,14 @@ https.get(url, (res) => {
     fs.writeFileSync(path.join(gameDir, 'original.html'), data);
     console.log('✓ 下载完成');
     
-    // 提取 head
+    // 提取 head 并本地化资源路径
     const headMatch = data.match(/<head>([\s\S]*?)<\/head>/i);
     if (headMatch) {
-      fs.writeFileSync(path.join(gameDir, 'head.html'), headMatch[1].trim());
-      console.log('✓ 提取 head');
+      let headContent = headMatch[1].trim();
+      // 将 poki.ee 的静态资源路径替换为本地路径
+      headContent = headContent.replace(/https:\/\/poki\.ee\/(static|js|css|themes)\//g, '/$1/');
+      fs.writeFileSync(path.join(gameDir, 'head.html'), headContent);
+      console.log('✓ 提取 head 并本地化资源路径');
     }
     
     // 提取 body
