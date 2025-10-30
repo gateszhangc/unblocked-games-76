@@ -32,11 +32,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# screenshots and data
+# screenshots and temporary files
 /screenshots
-/data
 poki_home.html
-*.html
 
 # IDE
 .vscode/
