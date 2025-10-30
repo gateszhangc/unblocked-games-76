@@ -1,14 +1,19 @@
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { notFound } from 'next/navigation'
 
 export default function GamePage({ params }: { params: { slug: string } }) {
   const slug = params.slug
   
   let bodyContent = ''
+  let headContent = ''
+  
   try {
     bodyContent = readFileSync(
       join(process.cwd(), 'data', 'games', slug, 'body.html'),
+      'utf8'
+    )
+    headContent = readFileSync(
+      join(process.cwd(), 'data', 'games', slug, 'head.html'),
       'utf8'
     )
   } catch (e) {
@@ -21,5 +26,25 @@ export default function GamePage({ params }: { params: { slug: string } }) {
     )
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
+  // 提取 head 中的 style 和 link 标签
+  const styles = extractStyles(headContent)
+  const links = extractLinks(headContent)
+
+  return (
+    <>
+      <div dangerouslySetInnerHTML={{ __html: styles }} />
+      <div dangerouslySetInnerHTML={{ __html: links }} />
+      <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
+    </>
+  )
+}
+
+function extractStyles(headContent: string): string {
+  const styleMatches = headContent.match(/<style[^>]*>[\s\S]*?<\/style>/gi)
+  return styleMatches ? styleMatches.join('\n') : ''
+}
+
+function extractLinks(headContent: string): string {
+  const linkMatches = headContent.match(/<link[^>]*>/gi)
+  return linkMatches ? linkMatches.join('\n') : ''
 }

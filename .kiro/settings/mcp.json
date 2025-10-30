@@ -17,7 +17,8 @@
         "evaluate_script",
         "get_network_request",
         "performance_start_trace",
-        "new_page"
+        "new_page",
+        "select_page"
       ]
     }
   }
