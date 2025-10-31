@@ -21,7 +21,9 @@
         "new_page",
         "select_page",
         "click",
-        "wait_for"
+        "wait_for",
+        "fill",
+        "hover"
       ]
     }
   }
