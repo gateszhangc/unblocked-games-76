@@ -1,0 +1,37 @@
+# Robots.txt for https://www.unblockedgames-76.site/
+# Generated for Unblocked Games 76 SEO Optimization
+
+User-agent: *
+Allow: /
+Allow: /games/
+Allow: /g/
+Allow: /css/
+Allow: /js/
+Allow: /static/
+Allow: /themes/
+
+# Allow specific search engines with advanced crawling
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 3
+
+# Sitemap location
+Sitemap: https://www.unblockedgames-76.site/sitemap.xml
+
+# Caching instructions
+# Cache-Control: public, max-age=86400
+
+# SEO Notes:
+# - This robots.txt allows search engines to crawl all game pages
+# - Prioritizes crawling for Google, Bing, and Yahoo
+# - Blocks aggressive and unwanted crawlers
+# - Includes sitemap reference for better discovery
+# - Optimized for unblocked games 76 keyword strategy

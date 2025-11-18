@@ -1,0 +1,85 @@
+{
+  "name": "Unblocked Games 76 - Play Free Online Games",
+  "short_name": "Unblocked Games 76",
+  "description": "Play 20,000+ free unblocked games 76 at school! Best collection of retro bowl, slope, 1v1 lol, cookie clicker. Safe, fast, no downloads required.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1583f9",
+  "theme_color": "#1583f9",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["games", "entertainment", "education"],
+  "icons": [
+    {
+      "src": "/static/img/logo/476588537Poki-Unblocked.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/logo/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/logo/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/logo/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/img/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/static/img/screenshot-mobile.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Popular Games",
+      "short_name": "Popular",
+      "description": "Access most popular unblocked games 76",
+      "url": "/popular",
+      "icons": [
+        {
+          "src": "/static/img/logo/shortcut-popular.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Action Games",
+      "short_name": "Action",
+      "description": "Play action unblocked games 76",
+      "url": "/action",
+      "icons": [
+        {
+          "src": "/static/img/logo/shortcut-action.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": ["focus-existing", "navigate-new", "navigate-existing"]
+  }
+}
