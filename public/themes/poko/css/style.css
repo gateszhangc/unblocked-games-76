@@ -167,7 +167,7 @@ body .navbar {
     left: 0;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     z-index: 0;
 }
 
@@ -178,10 +178,7 @@ body .navbar {
 
 .m-grid-start ._400x400 {
     grid-column-start: span 2;
-    grid-row-end: span 5;
-        margin-bottom: -18px;
-            margin-right: -15px;
-    margin-left: -17px;
+    grid-row-end: span 2;
 }
 
 /* .m-grid-start ._700x700 > * {
@@ -336,10 +333,11 @@ body .navbar {
 }
 
 .m-category-grid .m-category-card img {
-    height: 100%;
+    height: 90px;
     width: 90px;
     object-fit: cover;
     border-radius: 15px;
+    flex-shrink: 0;
 }
 
 footer::before {
@@ -876,8 +874,8 @@ body .offcanvas .live-search .for-desktop:hover {
 }
 
 
-@media screen and (max-width: 900px) and (orientation: landscape)   { 
-    .gameplay-container.on-frame .game-details { 
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    .gameplay-container.on-frame .game-details {
         display: none !important;
 
     }
@@ -972,7 +970,7 @@ body .offcanvas .live-search .for-desktop:hover {
 
 
 @media screen and (max-width: 645px) {
-    .page-content-container  {
+    .page-content-container {
         flex-direction: column;
     }
 }
@@ -996,7 +994,7 @@ body .offcanvas .live-search .for-desktop:hover {
     position: relative;
 }
 
-.advert-space > img {
+.advert-space>img {
     border-radius: 9px;
 }
 
@@ -1050,13 +1048,16 @@ body .offcanvas .live-search .for-desktop:hover {
     text-decoration: none;
     color: #054a91;
 }
+
 .html-content a:hover {
     color: #009cff;
 }
+
 .brdcm-style {
     text-transform: uppercase;
     font-weight: 500;
 }
+
 @media screen and (max-width: 378px) {
     .gameplay-container {
         grid-column-start: span 2 !important;
@@ -1064,7 +1065,7 @@ body .offcanvas .live-search .for-desktop:hover {
     }
 
     .m-category-grid {
-       display: block !important;
+        display: block !important;
     }
 
     .m-category-grid .m-category-card {
@@ -1072,7 +1073,7 @@ body .offcanvas .live-search .for-desktop:hover {
     }
 }
 
-@media screen and (max-width: 500px) { 
+@media screen and (max-width: 500px) {
     .advert-space {
         grid-column-start: span 2 !important;
         grid-row-end: span 2 !important;
