@@ -23,7 +23,8 @@
         "click",
         "wait_for",
         "fill",
-        "hover"
+        "hover",
+        "get_console_message"
       ]
     }
   }

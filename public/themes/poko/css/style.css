@@ -58,13 +58,15 @@ body::before {
 }
 
 body .navbar {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 16px;
     overflow: hidden;
     position: sticky;
     top: 10px;
     z-index: 99;
-    box-shadow: 0 5px 10px var(--card-shadow);
+    box-shadow: 0 8px 24px var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .m-grid-start .navbar {
@@ -74,21 +76,67 @@ body .navbar {
 
 }
 
+.m-grid-start .navbar img {
+    transition: transform 0.3s ease;
+}
+
 .m-grid-start .navbar img:hover {
-    transform: scale(1.08);
+    transform: scale(1.08) rotate(5deg);
+}
+
+.m-grid-start .navbar button,
+.m-grid-start .navbar a {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+.m-grid-start .navbar button:hover,
+.m-grid-start .navbar a:hover {
+    background: rgba(21, 131, 249, 0.1);
+    transform: scale(1.05);
 }
 
 .m-grid-start .navbar svg path {
+    stroke: #8c8c8c;
+    transition: stroke 0.3s ease;
+}
+
+.m-grid-start .navbar button:hover svg path,
+.m-grid-start .navbar a:hover svg path {
     stroke: var(--theme-color);
 }
 
 .m-grid-start .m-game-card {
     position: relative;
-    /* background: #fff; */
-    box-shadow: 0 5px 10px var(--card-shadow);
-    border-radius: .75rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
     overflow: hidden;
     z-index: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 波纹扩散效果 */
+.m-grid-start .m-game-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.m-grid-start .m-game-card:hover::after {
+    width: 300%;
+    height: 300%;
 }
 
 .m-grid-start .m-game-card .m-game-link {
@@ -98,15 +146,19 @@ body .navbar {
 }
 
 .m-grid-start .m-game-card .m-game-link picture {
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     display: block;
     height: 100%;
     width: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 图片旋转+放大效果 */
+.m-grid-start .m-game-card:hover .m-game-link picture {
+    transform: rotate(2deg) scale(1.12);
 }
 
 .m-grid-start .m-game-card .m-game-link picture img {
@@ -138,14 +190,15 @@ body .navbar {
 
 .m-grid-start .m-game-card:not(.not-hover) .m-game-link::before {
     content: '';
-    transition: .3s;
+    transition: opacity 0.3s ease;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(#1f1f1f00, rgba(38, 37, 37, 0.452));
+    background: linear-gradient(180deg, transparent 40%, rgba(16, 185, 129, 0.8) 100%);
     opacity: 0;
+    z-index: 2;
 }
 
 .m-grid-start .m-game-card:not(.not-hover):hover .m-game-link::before {
@@ -153,22 +206,26 @@ body .navbar {
 }
 
 .m-grid-start .m-game-card:not(.not-hover):hover {
-    transform: scale(1.06);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 
 
 .m-grid-start .m-game-card .m-game-link .m-game-details {
-    transition: .4s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     bottom: -100px;
     text-align: center;
     width: 100%;
     color: #fff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: 13px 6px;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 8px;
     opacity: 0;
+    z-index: 3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .m-grid-start .m-game-card:hover .m-game-details {
@@ -327,11 +384,22 @@ body .offcanvas .offcanvas-menu {
     position: absolute;
     top: 0;
     left: -100%;
-    background: #82FFE6;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
     width: 560px;
     height: 100%;
     box-sizing: border-box;
     padding: 15px;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
+}
+
+body .offcanvas .offcanvas-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+body .offcanvas .offcanvas-menu::-webkit-scrollbar-thumb {
+    background: var(--theme-color);
+    border-radius: 3px;
 }
 
 body .offcanvas .offcanvas-menu .live-search-attached-button svg {
