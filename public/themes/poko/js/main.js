@@ -167,6 +167,7 @@ const fullscreenButton = document.getElementById("fullscreenButton");
 
 // Function to request fullscreen
 function requestFullscreen(element) {
+  if (!element) return;
   if (element.requestFullscreen) {
     element.requestFullscreen();
   } else if (element.mozRequestFullScreen) {
@@ -197,7 +198,7 @@ function exitFullscreen() {
   }
 }
 
-if (fullscreenButton !== null) {
+if (fullscreenButton !== null && iframe !== null) {
   fullscreenButton.addEventListener("click", () => {
     if (
       !document.fullscreenElement &&
@@ -232,6 +233,7 @@ function copyToURL() {
 var LikeButton = document.getElementById("LikeButton");
 
 function LikeGame(game_id) {
+  if (!LikeButton) return;
   const xhr = new XMLHttpRequest();
   xhr.open("POST", `${window.zontal.url}xhr/like.php`);
   xhr.onreadystatechange = () => {
@@ -267,27 +269,31 @@ if (lForm !== null) {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
           if (xhr.responseText.includes("successfully") == true) {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "#96c93d",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "#96c93d",
+                },
+              }).showToast();
+            }
             setTimeout(() => {
               window.location.href = "./admin/";
               button.removeAttribute("disabled");
             }, 1500);
           } else {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "red",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "red",
+                },
+              }).showToast();
+            }
             button.removeAttribute("disabled");
           }
         }
@@ -321,27 +327,31 @@ if (RForm !== null) {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
           if (xhr.responseText.includes("successfully") == true) {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "#96c93d",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "#96c93d",
+                },
+              }).showToast();
+            }
             setTimeout(() => {
               window.location.href = "./";
               button.removeAttribute("disabled");
             }, 1500);
           } else {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "red",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "red",
+                },
+              }).showToast();
+            }
             button.removeAttribute("disabled");
           }
         }
@@ -373,26 +383,30 @@ if (upForm !== null) {
         if (xhr.status === 200) {
           console.log(xhr.responseText);
           if (xhr.responseText.includes("successfully") == true) {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "#96c93d",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "#96c93d",
+                },
+              }).showToast();
+            }
             setTimeout(() => {
               button.removeAttribute("disabled");
             }, 1500);
           } else {
-            Toastify({
-              text: xhr.responseText,
-              className: "info",
-              duration: 3000,
-              style: {
-                background: "red",
-              },
-            }).showToast();
+            if (typeof Toastify !== 'undefined') {
+              Toastify({
+                text: xhr.responseText,
+                className: "info",
+                duration: 3000,
+                style: {
+                  background: "red",
+                },
+              }).showToast();
+            }
             button.removeAttribute("disabled");
           }
         }
