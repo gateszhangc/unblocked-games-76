@@ -21,14 +21,22 @@ export default function ComingSoonPage() {
     'tung-sahur-clicker': {
       name: 'Tung Sahur Clicker',
       image: 'https://gamulo.com/wp-content/uploads/thumbs/custom/T/tung-tung-tung-sahur-clicker-logo-150x150.png'
+    },
+    'head-soccer-2024': {
+      name: 'Head Soccer 2024',
+      image: 'https://azgames.io/upload/cache/upload/imgs/thumbnail_90x90-m200x200.webp'
     }
   }
   
-  // 从URL参数获取游戏信息
-  const gameParam = searchParams.get('game')
-  const gameInfo = gameParam && gameData[gameParam]
-    ? gameData[gameParam]
-    : gameData['plonky'] // 默认显示plonky
+  // 从URL参数获取游戏信息，使用useState和useEffect避免水合错误
+  const [gameInfo, setGameInfo] = useState(gameData['plonky']) // 默认显示plonky
+  
+  useEffect(() => {
+    const gameParam = searchParams.get('game')
+    if (gameParam && gameData[gameParam]) {
+      setGameInfo(gameData[gameParam])
+    }
+  }, [searchParams])
 
   const isValidEmail = (email: string): boolean => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
